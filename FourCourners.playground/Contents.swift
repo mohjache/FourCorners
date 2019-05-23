@@ -2,6 +2,7 @@
   
 import UIKit
 import PlaygroundSupport
+import AVFoundation
 
 class MyViewController : UIViewController {
     override func loadView() {
@@ -11,6 +12,8 @@ class MyViewController : UIViewController {
         let restTime = 3.0
         let maxIntervals = 5
         var startingIntervals = 0
+        
+        let speech = AVSpeechSynthesizer()
         
         view.backgroundColor = .white
 
@@ -26,9 +29,12 @@ class MyViewController : UIViewController {
             timer in
 
             if(startingIntervals == maxIntervals) {
-                label.text = "Woooo!"
+                label.text = "Workout Complete!"
                 view.addSubview(label)
                 self.view = view
+                
+                let utterance = AVSpeechUtterance(string: "Workout Complete")
+                speech.speak(utterance)
                 timer.invalidate()
             } else {
                 let randomNumber = Int.random(in: 0 ... 3)
@@ -40,6 +46,9 @@ class MyViewController : UIViewController {
                 label.text = directions[randomNumber]
                 view.addSubview(label)
                 self.view = view
+                
+                let utterance = AVSpeechUtterance(string: directions[randomNumber])
+                speech.speak(utterance)
             }
         }
     }
