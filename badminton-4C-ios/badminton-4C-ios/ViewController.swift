@@ -10,45 +10,63 @@ import UIKit
 import AVFoundation
 
 class ViewController: UIViewController {
-    @IBOutlet weak var cornerLabel: UILabel!
-    let directions = ["top-left", "top-right", "bottom-left", "bottom-right"]
-    let restTime = 3.0
-    let maxIntervals = 10
-    var startingIntervals = 0
-    
-    let speech = AVSpeechSynthesizer()
+    @IBOutlet var cornerLabel: UILabel!
+    @IBOutlet var startWorkoutButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.cornerLabel.text = "Ready....Go!"
-        self.startTimer()
-        // Do any additional setup after loading the view.
     }
+    
 
-   
-    func startTimer() {
-        _ = Timer.scheduledTimer(withTimeInterval: self.restTime, repeats: true){
+    @IBAction func startButtonClicked(_ sender: UIButton) {
+        self.startWorkoutButton.isHidden = true
+        let restTime = 3.0
+        let maxIntervals = 20
+        
+        self.setCornerText(to: "Ready....Go!")
+        startTimer(maxIntervals: maxIntervals, restTime: restTime)
+    }
+    
+    func chooseAndSpeakRandomCorner(speech: AVSpeechSynthesizer) {
+        let directions = ["front-left", "front-right", "back-left", "back-right"]
+        let randomNumber = Int.random(in: 0 ... 3)
+        let chosenDirection = directions[randomNumber]
+        
+        self.setCornerText(to: chosenDirection)
+        
+        self.utterTextToSpeech(text: chosenDirection, speech: speech)
+    }
+    
+    func startTimer(maxIntervals: Int, restTime: Double) {
+        let speech = AVSpeechSynthesizer()
+        var startingIntervals = 0
+        
+        Timer.scheduledTimer(withTimeInterval: restTime, repeats: true){
             timer in
-            
-            if(self.startingIntervals == self.maxIntervals) {
-                self.cornerLabel.text = "Workout Complete!"
-                
-                let utterance = AVSpeechUtterance(string: "Workout Complete")
-                self.speech.speak(utterance)
-                timer.invalidate()
+            if startingIntervals < maxIntervals {
+                self.chooseAndSpeakRandomCorner(speech: speech)
+                startingIntervals += 1
             } else {
-                let randomNumber = Int.random(in: 0 ... 3)
-                print("direction next is: \(self.directions[randomNumber])")
                 
-                self.startingIntervals = self.startingIntervals + 1
-                print("Interval Count is now: \(self.startingIntervals)")
+                let finishMessage = "Workout Complete!"
+                self.setCornerText(to: finishMessage)
                 
-                self.cornerLabel.text = self.directions[randomNumber]
-              
-                let utterance = AVSpeechUtterance(string: self.directions[randomNumber])
-                self.speech.speak(utterance)
+                self.utterTextToSpeech(text: finishMessage, speech: speech)
+                
+                timer.invalidate()
+                self.startWorkoutButton.isHidden = false;
             }
         }
+    }
+    
+    private func setCornerText(to text: String) {
+        self.cornerLabel.text = text
+    }
+    
+    private func utterTextToSpeech(text: String, speech: AVSpeechSynthesizer) {
+        let utterance = AVSpeechUtterance(string: text)
+        
+        speech.speak(utterance)
     }
     
     
