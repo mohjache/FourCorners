@@ -18,35 +18,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start 4C " textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cce-S9-k43">
-                                <rect key="frame" x="20" y="184" width="374" height="338"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start 4C " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cce-S9-k43">
+                                <rect key="frame" x="83" y="184" width="248" height="249"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="338" id="fJ3-Bf-0yq"/>
+                                    <constraint firstAttribute="height" constant="249" id="TFj-ON-zyd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBW-xS-i8y">
-                                <rect key="frame" x="20" y="634" width="374" height="228"/>
+                                <rect key="frame" x="83" y="641" width="248" height="131"/>
+                                <color key="backgroundColor" red="0.25240863388335077" green="0.20824259897269715" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="228" id="elL-AB-pZf"/>
+                                    <constraint firstAttribute="height" constant="131" id="aMW-Kb-fjM"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <state key="normal" title="Start Workout"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <state key="normal" title="Start Workout">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="startButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fMc-Bu-KbK"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="cce-S9-k43" firstAttribute="trailing" secondItem="yBW-xS-i8y" secondAttribute="trailing" id="BGn-KS-P56"/>
-                            <constraint firstItem="cce-S9-k43" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="OnK-6A-NXp"/>
-                            <constraint firstItem="cce-S9-k43" firstAttribute="leading" secondItem="yBW-xS-i8y" secondAttribute="leading" id="SiS-37-VBY"/>
-                            <constraint firstItem="yBW-xS-i8y" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="TfX-hG-5we"/>
-                            <constraint firstItem="cce-S9-k43" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="nYm-xo-nf8"/>
-                            <constraint firstItem="cce-S9-k43" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="140" id="vGs-VJ-BJR"/>
+                            <constraint firstItem="cce-S9-k43" firstAttribute="leading" secondItem="yBW-xS-i8y" secondAttribute="leading" id="1nK-8W-Dnf"/>
+                            <constraint firstItem="cce-S9-k43" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="140" id="5Oh-32-6bg"/>
+                            <constraint firstItem="cce-S9-k43" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="83" id="h1e-xQ-oGd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="yBW-xS-i8y" secondAttribute="bottom" constant="90" id="rWZ-8W-Isw"/>
+                            <constraint firstItem="cce-S9-k43" firstAttribute="trailing" secondItem="yBW-xS-i8y" secondAttribute="trailing" id="ueN-aB-Z9r"/>
+                            <constraint firstItem="cce-S9-k43" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yJ2-U2-5KE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

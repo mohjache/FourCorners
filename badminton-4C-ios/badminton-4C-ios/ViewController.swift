@@ -21,9 +21,9 @@ class ViewController: UIViewController {
     @IBAction func startButtonClicked(_ sender: UIButton) {
         self.startWorkoutButton.isHidden = true
         let restTime = 3.0
-        let maxIntervals = 20
+        let maxIntervals = 5
         
-        self.setCornerText(to: "Ready....Go!")
+        self.cornerLabel.text = "Ready....Go!"
         startTimer(maxIntervals: maxIntervals, restTime: restTime)
     }
     
@@ -32,9 +32,9 @@ class ViewController: UIViewController {
         let randomNumber = Int.random(in: 0 ... 3)
         let chosenDirection = directions[randomNumber]
         
-        self.setCornerText(to: chosenDirection)
+        self.cornerLabel.text = chosenDirection
         
-        self.utterTextToSpeech(text: chosenDirection, speech: speech)
+        self.utterTextToSpeech(utteredText: chosenDirection, speech: speech)
     }
     
     func startTimer(maxIntervals: Int, restTime: Double) {
@@ -49,23 +49,18 @@ class ViewController: UIViewController {
             } else {
                 
                 let finishMessage = "Workout Complete!"
-                self.setCornerText(to: finishMessage)
+                self.cornerLabel.text = finishMessage
                 
-                self.utterTextToSpeech(text: finishMessage, speech: speech)
+                self.utterTextToSpeech(utteredText: finishMessage, speech: speech)
                 
                 timer.invalidate()
                 self.startWorkoutButton.isHidden = false;
             }
         }
     }
-    
-    private func setCornerText(to text: String) {
-        self.cornerLabel.text = text
-    }
-    
-    private func utterTextToSpeech(text: String, speech: AVSpeechSynthesizer) {
-        let utterance = AVSpeechUtterance(string: text)
-        
+
+    private func utterTextToSpeech(utteredText: String, speech: AVSpeechSynthesizer) {
+        let utterance = AVSpeechUtterance(string: utteredText)
         speech.speak(utterance)
     }
     
