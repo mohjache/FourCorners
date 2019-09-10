@@ -31,10 +31,15 @@ class FourCornerExerciseScreen: UIViewController {
         startExcerciseButton.backgroundColor = .blue
         startExcerciseButton.setTitleColor(.white, for: .normal)
         startExcerciseButton.setTitle("Start", for: .normal)
+        startExcerciseButton.addTarget(self, action: #selector(ExerciseButtonTapped), for: .touchUpInside)
         
         view.addSubview(startExcerciseButton)
         
         setupExerciseButtonConstraints()
+    }
+    
+    @objc func ExerciseButtonTapped() {
+        print("poggers")
     }
     
     func setupExerciseButtonConstraints() {
