@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A31827252327D69900C19A7E /* FourCornerExerciseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31827242327D69900C19A7E /* FourCornerExerciseScreen.swift */; };
 		A32E8B4C22DF50A800372EE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32E8B4B22DF50A800372EE9 /* AppDelegate.swift */; };
 		A32E8B4E22DF50A800372EE9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32E8B4D22DF50A800372EE9 /* ViewController.swift */; };
 		A32E8B5122DF50A800372EE9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A32E8B4F22DF50A800372EE9 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A31827242327D69900C19A7E /* FourCornerExerciseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourCornerExerciseScreen.swift; sourceTree = "<group>"; };
 		A32E8B4822DF50A800372EE9 /* badminton-4C-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "badminton-4C-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A32E8B4B22DF50A800372EE9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A32E8B4D22DF50A800372EE9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				A32E8B4B22DF50A800372EE9 /* AppDelegate.swift */,
+				A31827242327D69900C19A7E /* FourCornerExerciseScreen.swift */,
 				A32E8B4D22DF50A800372EE9 /* ViewController.swift */,
 				A32E8B4F22DF50A800372EE9 /* Main.storyboard */,
 				A32E8B5222DF50A900372EE9 /* Assets.xcassets */,
@@ -136,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A32E8B4E22DF50A800372EE9 /* ViewController.swift in Sources */,
+				A31827252327D69900C19A7E /* FourCornerExerciseScreen.swift in Sources */,
 				A32E8B4C22DF50A800372EE9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
