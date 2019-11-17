@@ -17,26 +17,27 @@ struct ContentView: View {
     let restTime: Double = 3.0
     let maxIntervals : Int = 10
     let speech = AVSpeechSynthesizer()
-  
+    
     
     var body: some View {
         VStack{
             Text(cornerLabel)
-            Button(action: {
-                self.startTimer(maxIntervals: self.maxIntervals, restTime: self.restTime)
-            }){
-                Text("Start")
+            if workoutInProgess {
+                Button(action: {
+                    self.stopTimer()
+                }){
+                    Text("Stop")
+                }
+                .background(Color.red)
+            } else {
+                Button(action: {
+                    self.startTimer(maxIntervals: self.maxIntervals, restTime: self.restTime)
+                }){
+                    Text("Start")
+                }
+                .background(Color.green)
                 
             }
-            .background(Color.green)
-            
-            Button(action: {
-                self.stopTimer()
-            }){
-                Text("Stop")
-        
-            }
-            .background(Color.red)
             
         }
     }
@@ -55,6 +56,7 @@ struct ContentView: View {
     func startTimer(maxIntervals: Int, restTime: Double) {
         guard self.timer == nil else { return }
         var startingIntervals = 0
+        workoutInProgess = true;
         
         self.timer = Timer.scheduledTimer(withTimeInterval: restTime, repeats: true){
             timer in
@@ -73,6 +75,7 @@ struct ContentView: View {
     }
     
     func stopTimer(){
+        workoutInProgess = false;
         speech.stopSpeaking(at: .word)
         timer?.invalidate()
         timer = Timer()
