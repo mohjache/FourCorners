@@ -11,8 +11,13 @@ import AVFoundation
 
 struct ContentView: View {
     @State private var cornerLabel = "Ready!"
-    let restTime: Double = 5.0
+    @State private var workoutInProgess = false;
+    @State private var timer : Timer? = Timer()
+    
+    let restTime: Double = 3.0
     let maxIntervals : Int = 10
+    let speech = AVSpeechSynthesizer()
+  
     
     var body: some View {
         VStack{
@@ -20,45 +25,62 @@ struct ContentView: View {
             Button(action: {
                 self.startTimer(maxIntervals: self.maxIntervals, restTime: self.restTime)
             }){
-                Text("Start Workout")
+                Text("Start")
+                
             }
+            .background(Color.green)
+            
+            Button(action: {
+                self.stopTimer()
+            }){
+                Text("Stop")
+        
+            }
+            .background(Color.red)
             
         }
     }
     
-    func chooseAndSpeakRandomCorner(speech: AVSpeechSynthesizer) {
+    
+    func chooseAndSpeakRandomCorner() {
         let directions = ["front-left", "front-right", "back-left", "back-right"]
         let randomNumber = Int.random(in: 0 ... 3)
         let chosenDirection = directions[randomNumber]
         
         self.cornerLabel = chosenDirection
         
-        utterTextToSpeech(utteredText: chosenDirection, speech: speech)
+        utterTextToSpeech(utteredText: chosenDirection)
     }
     
     func startTimer(maxIntervals: Int, restTime: Double) {
-        let speech = AVSpeechSynthesizer()
+        guard self.timer == nil else { return }
         var startingIntervals = 0
         
-        Timer.scheduledTimer(withTimeInterval: restTime, repeats: true){
+        self.timer = Timer.scheduledTimer(withTimeInterval: restTime, repeats: true){
             timer in
             if startingIntervals < maxIntervals {
-                self.chooseAndSpeakRandomCorner(speech: speech)
+                self.chooseAndSpeakRandomCorner()
                 startingIntervals += 1
             } else {
                 let finishMessage = "Workout Complete!"
                 self.cornerLabel = finishMessage
                 
-                self.utterTextToSpeech(utteredText: finishMessage, speech: speech)
+                self.utterTextToSpeech(utteredText: finishMessage)
                 
-                timer.invalidate()
+                self.stopTimer()
             }
         }
     }
     
-    private func utterTextToSpeech(utteredText: String, speech: AVSpeechSynthesizer) {
+    func stopTimer(){
+        speech.stopSpeaking(at: .word)
+        timer?.invalidate()
+        timer = Timer()
+    }
+    
+    private func utterTextToSpeech(utteredText: String) {
         let utterance = AVSpeechUtterance(string: utteredText)
-        speech.speak(utterance)
+        self.speech.speak(utterance)
     }
 }
 

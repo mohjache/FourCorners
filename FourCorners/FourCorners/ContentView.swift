@@ -1,30 +1,37 @@
 //
-//  ViewController.swift
-//  badminton-4C-ios
+//  ContentView.swift
+//  FourCorners
 //
-//  Created by anaru herbert on 17/7/19.
+//  Created by Anaru Herbert on 17/11/19.
 //  Copyright © 2019 Anaru Herbert. All rights reserved.
 //
 
-import UIKit
+import SwiftUI
 import AVFoundation
 
-class ViewController: UIViewController {
-    @IBOutlet var cornerLabel: UILabel!
-    @IBOutlet var startWorkoutButton: UIButton!
+struct ContentView: View {
+    @State private var cornerLabel = "Ready!"
+    let restTime: Double = 5.0
+    let maxIntervals : Int = 10
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-
-    @IBAction func startButtonClicked(_ sender: UIButton) {
-        self.startWorkoutButton.isHidden = true
-        let restTime = 3.0
-        let maxIntervals = 5
-        
-        self.cornerLabel.text = "Ready....Go!"
-        startTimer(maxIntervals: maxIntervals, restTime: restTime)
+    var body: some View {
+        VStack{
+            Text(cornerLabel)
+            .padding()
+            Button(action: {
+                self.startTimer(maxIntervals: self.maxIntervals, restTime: self.restTime)
+            }){
+                Text("Start Workout")
+            }
+            .padding()
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color.primary, lineWidth: 2)
+                    
+            )
+               
+        }
+        .foregroundColor(.primary)
     }
     
     func chooseAndSpeakRandomCorner(speech: AVSpeechSynthesizer) {
@@ -32,9 +39,9 @@ class ViewController: UIViewController {
         let randomNumber = Int.random(in: 0 ... 3)
         let chosenDirection = directions[randomNumber]
         
-        self.cornerLabel.text = chosenDirection
+        self.cornerLabel = chosenDirection
         
-        self.utterTextToSpeech(utteredText: chosenDirection, speech: speech)
+        utterTextToSpeech(utteredText: chosenDirection, speech: speech)
     }
     
     func startTimer(maxIntervals: Int, restTime: Double) {
@@ -47,23 +54,31 @@ class ViewController: UIViewController {
                 self.chooseAndSpeakRandomCorner(speech: speech)
                 startingIntervals += 1
             } else {
-                
                 let finishMessage = "Workout Complete!"
-                self.cornerLabel.text = finishMessage
+                self.cornerLabel = finishMessage
                 
                 self.utterTextToSpeech(utteredText: finishMessage, speech: speech)
                 
                 timer.invalidate()
-                self.startWorkoutButton.isHidden = false;
             }
         }
     }
-
+    
     private func utterTextToSpeech(utteredText: String, speech: AVSpeechSynthesizer) {
         let utterance = AVSpeechUtterance(string: utteredText)
         speech.speak(utterance)
     }
-    
-    
+}
+
+
+
+
+
+
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }
 

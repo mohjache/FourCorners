@@ -89,3 +89,5 @@ fastlane/test_output
 
 iOSInjectionProject/
 badminton-4C-ios/.DS_Store
+
+.DS_Store

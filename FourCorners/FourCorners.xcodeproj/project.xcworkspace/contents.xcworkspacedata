@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:badminton-4C-ios.xcodeproj">
+      location = "self:FourCorners.xcodeproj">
    </FileRef>
 </Workspace>
