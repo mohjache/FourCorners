@@ -14,28 +14,42 @@ struct ContentView: View {
     @State private var workoutInProgess = false;
     @State private var timer : Timer? = Timer()
     
-    let restTime: Double = 3.0
-    let maxIntervals : Int = 10
+    @State private var restTime: Int = 3
+    @State private var maxIntervals : Int = 10
     let speech = AVSpeechSynthesizer()
     
     
     var body: some View {
         VStack{
-            Text(cornerLabel)
             if workoutInProgess {
+                Text(cornerLabel)
+                    .font(.title)
                 Button(action: {
                     self.stopTimer()
                 }){
                     Text("Stop")
                 }
-                .background(Color.red)
             } else {
+                
+                Form{
+                    Picker("Rest Time", selection: $restTime) {
+                        ForEach(0 ..< 6) {
+                            Text("\($0) seconds")
+                        }
+                    }
+                    Picker("Intervals", selection: $maxIntervals) {
+                        ForEach(0 ..< 21) {
+                            Text("\($0)")
+                        }
+                    }
+                    
+                    
+                }
                 Button(action: {
-                    self.startTimer(maxIntervals: self.maxIntervals, restTime: self.restTime)
+                    self.startTimer(maxIntervals: self.maxIntervals, restTime: Double(self.restTime))
                 }){
                     Text("Start")
                 }
-                .background(Color.green)
                 
             }
             
