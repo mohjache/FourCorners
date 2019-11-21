@@ -8,15 +8,25 @@
 
 import SwiftUI
 import AVFoundation
+import HealthKit
 
 struct ContentView: View {
     @State private var cornerLabel = "Ready!"
     @State private var workoutInProgess = false;
     @State private var timer : Timer? = Timer()
     
-    @State private var restTime: Int = 3
+    @State private var restTime: Int = 0
+    var restTimeSelected : Int {
+        return restTime + 5
+    }
     @State private var maxIntervals : Int = 10
+    @State private var healthStore  = HKHealthStore()
+    
     let speech = AVSpeechSynthesizer()
+    let configuration = HKWorkoutConfiguration()
+    
+    @State private var session: HKWorkoutSession!
+    @State private var builder: HKLiveWorkoutBuilder!
     
     
     var body: some View {
@@ -32,8 +42,8 @@ struct ContentView: View {
             } else {
                 
                 Form{
-                    Picker("Rest Time", selection: $restTime) {
-                        ForEach(0 ..< 6) {
+                    Picker("Rest", selection: $restTime) {
+                        ForEach(5 ..< 11) {
                             Text("\($0) seconds")
                         }
                     }
@@ -46,14 +56,49 @@ struct ContentView: View {
                     
                 }
                 Button(action: {
-                    self.startTimer(maxIntervals: self.maxIntervals, restTime: Double(self.restTime))
+                    self.startTimer(maxIntervals: self.maxIntervals, restTime: Double(self.restTimeSelected))
                 }){
                     Text("Start")
                 }
                 
             }
             
+        }.onAppear{
+            self.requestHealthKit()
         }
+    }
+    
+    func requestHealthKit(){
+        if HKHealthStore.isHealthDataAvailable() {
+            self.healthStore = HKHealthStore()
+            
+            let allTypes = Set([HKObjectType.workoutType(),
+                                HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
+                                HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
+                                HKObjectType.quantityType(forIdentifier: .heartRate)!])
+            
+            healthStore.requestAuthorization(toShare: allTypes, read: allTypes) { (success, error) in
+                if !success {
+                    // Handle the error here.
+                } else {
+                    self.configuration.activityType = .badminton
+                    self.configuration.locationType = .unknown
+                    
+                    do {
+                        self.session = try HKWorkoutSession(healthStore: self.healthStore, configuration: self.configuration)
+                        self.builder = self.session.associatedWorkoutBuilder()
+                        self.builder.dataSource = HKLiveWorkoutDataSource(healthStore: self.healthStore,
+                                                                          workoutConfiguration: self.configuration)
+                    } catch {
+                        return
+                    }
+                    
+                    
+                }
+            }
+            
+        }
+        
     }
     
     
@@ -69,6 +114,11 @@ struct ContentView: View {
     
     func startTimer(maxIntervals: Int, restTime: Double) {
         guard self.timer == nil else { return }
+        
+        session.startActivity(with: Date())
+        builder.beginCollection(withStart: Date()) { (success, error) in
+        }
+    
         var startingIntervals = 0
         workoutInProgess = true;
         
@@ -89,11 +139,24 @@ struct ContentView: View {
     }
     
     func stopTimer(){
+        
+        session.end()
+        builder.endCollection(withEnd: Date()) { (success, error) in
+            self.builder.finishWorkout { (workout, error) in
+                print(workout?.duration)
+                // Dispatch to main, because we are updating the interface.
+                DispatchQueue.main.async() {
+                }
+            }
+        }
+        
         workoutInProgess = false;
         speech.stopSpeaking(at: .word)
         timer?.invalidate()
         timer = Timer()
     }
+    
+
     
     private func utterTextToSpeech(utteredText: String) {
         let utterance = AVSpeechUtterance(string: utteredText)
