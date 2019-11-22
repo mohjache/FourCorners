@@ -84,14 +84,7 @@ struct ContentView: View {
                     self.configuration.activityType = .badminton
                     self.configuration.locationType = .unknown
                     
-                    do {
-                        self.session = try HKWorkoutSession(healthStore: self.healthStore, configuration: self.configuration)
-                        self.builder = self.session.associatedWorkoutBuilder()
-                        self.builder.dataSource = HKLiveWorkoutDataSource(healthStore: self.healthStore,
-                                                                          workoutConfiguration: self.configuration)
-                    } catch {
-                        return
-                    }
+                    
                     
                     
                 }
@@ -115,12 +108,23 @@ struct ContentView: View {
     func startTimer(maxIntervals: Int, restTime: Double) {
         guard self.timer == nil else { return }
         
-        session.startActivity(with: Date())
-        builder.beginCollection(withStart: Date()) { (success, error) in
+        do {
+            self.session = try HKWorkoutSession(healthStore: self.healthStore, configuration: self.configuration)
+            self.builder = self.session.associatedWorkoutBuilder()
+            self.builder.dataSource = HKLiveWorkoutDataSource(healthStore: self.healthStore,
+                                                              workoutConfiguration: self.configuration)
+            
+            self.session.startActivity(with: Date())
+            self.builder.beginCollection(withStart: Date()) { (success, error) in
+            }
+        } catch {
+            return
         }
-    
+        
+        
         var startingIntervals = 0
-        workoutInProgess = true;
+        cornerLabel = "Ready!"
+        workoutInProgess = true
         
         self.timer = Timer.scheduledTimer(withTimeInterval: restTime, repeats: true){
             timer in
@@ -128,7 +132,7 @@ struct ContentView: View {
                 self.chooseAndSpeakRandomCorner()
                 startingIntervals += 1
             } else {
-                let finishMessage = "Workout Complete!"
+                let finishMessage = "Done!"
                 self.cornerLabel = finishMessage
                 
                 self.utterTextToSpeech(utteredText: finishMessage)
@@ -143,7 +147,6 @@ struct ContentView: View {
         session.end()
         builder.endCollection(withEnd: Date()) { (success, error) in
             self.builder.finishWorkout { (workout, error) in
-                print(workout?.duration)
                 // Dispatch to main, because we are updating the interface.
                 DispatchQueue.main.async() {
                 }
@@ -156,7 +159,7 @@ struct ContentView: View {
         timer = Timer()
     }
     
-
+    
     
     private func utterTextToSpeech(utteredText: String) {
         let utterance = AVSpeechUtterance(string: utteredText)
