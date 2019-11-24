@@ -8,7 +8,6 @@
 
 import SwiftUI
 import AVFoundation
-import HealthKit
 
 struct ContentView: View {
     @State private var cornerLabel = "Ready!"
@@ -20,14 +19,8 @@ struct ContentView: View {
         return restTime + 5
     }
     @State private var maxIntervals : Int = 10
-    @State private var healthStore  = HKHealthStore()
     
     let speech = AVSpeechSynthesizer()
-    let configuration = HKWorkoutConfiguration()
-    
-    @State private var session: HKWorkoutSession!
-    @State private var builder: HKLiveWorkoutBuilder!
-    
     
     var body: some View {
         VStack{
@@ -63,37 +56,8 @@ struct ContentView: View {
                 
             }
             
-        }.onAppear{
-            self.requestHealthKit()
         }
     }
-    
-    func requestHealthKit(){
-        if HKHealthStore.isHealthDataAvailable() {
-            self.healthStore = HKHealthStore()
-            
-            let allTypes = Set([HKObjectType.workoutType(),
-                                HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)!,
-                                HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)!,
-                                HKObjectType.quantityType(forIdentifier: .heartRate)!])
-            
-            healthStore.requestAuthorization(toShare: allTypes, read: allTypes) { (success, error) in
-                if !success {
-                    // Handle the error here.
-                } else {
-                    self.configuration.activityType = .badminton
-                    self.configuration.locationType = .unknown
-                    
-                    
-                    
-                    
-                }
-            }
-            
-        }
-        
-    }
-    
     
     func chooseAndSpeakRandomCorner() {
         let directions = ["front-left", "front-right", "back-left", "back-right"]
@@ -108,20 +72,7 @@ struct ContentView: View {
     func startTimer(maxIntervals: Int, restTime: Double) {
         guard self.timer == nil else { return }
         
-        do {
-            self.session = try HKWorkoutSession(healthStore: self.healthStore, configuration: self.configuration)
-            self.builder = self.session.associatedWorkoutBuilder()
-            self.builder.dataSource = HKLiveWorkoutDataSource(healthStore: self.healthStore,
-                                                              workoutConfiguration: self.configuration)
-            
-            self.session.startActivity(with: Date())
-            self.builder.beginCollection(withStart: Date()) { (success, error) in
-            }
-        } catch {
-            return
-        }
-        
-        
+
         var startingIntervals = 0
         cornerLabel = "Ready!"
         workoutInProgess = true
@@ -143,16 +94,6 @@ struct ContentView: View {
     }
     
     func stopTimer(){
-        
-        session.end()
-        builder.endCollection(withEnd: Date()) { (success, error) in
-            self.builder.finishWorkout { (workout, error) in
-                // Dispatch to main, because we are updating the interface.
-                DispatchQueue.main.async() {
-                }
-            }
-        }
-        
         workoutInProgess = false;
         speech.stopSpeaking(at: .word)
         timer?.invalidate()
