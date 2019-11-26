@@ -11,15 +11,23 @@ import AVFoundation
 
 struct ContentView: View {
     @State private var cornerLabel = "Ready!"
-    @State private var workoutInProgess = false;
-    @State private var timer : Timer? = Timer()
+    @State private var workoutInProgess = false
+    @State private var intervalTimer : Timer? = Timer()
+    @State private var restTimeIndex: Int = 0
+    @State private var intervalIndex : Int = 0
     
-    @State private var restTime: Int = 0
+    let minimumRestTimeInSeconds = 3
+    let minimumIntervals = 10
+    
     var restTimeSelected : Int {
-        return restTime + 5
+        return restTimeIndex + minimumRestTimeInSeconds
     }
-    @State private var maxIntervals : Int = 10
     
+    var intervalSelected : Int {
+        return intervalIndex + minimumIntervals
+    }
+    
+     
     let speech = AVSpeechSynthesizer()
     
     var body: some View {
@@ -28,20 +36,20 @@ struct ContentView: View {
                 Text(cornerLabel)
                     .font(.title)
                 Button(action: {
-                    self.stopTimer()
+                    self.stopIntervalTimer()
                 }){
                     Text("Stop")
                 }
             } else {
                 
                 Form{
-                    Picker("Rest", selection: $restTime) {
-                        ForEach(5 ..< 11) {
+                    Picker("Rest", selection: $restTimeIndex) {
+                        ForEach(minimumRestTimeInSeconds ..< 11) {
                             Text("\($0) seconds")
                         }
                     }
-                    Picker("Intervals", selection: $maxIntervals) {
-                        ForEach(0 ..< 21) {
+                    Picker("Intervals", selection: $intervalIndex) {
+                        ForEach(minimumIntervals ..< 21) {
                             Text("\($0)")
                         }
                     }
@@ -49,7 +57,7 @@ struct ContentView: View {
                     
                 }
                 Button(action: {
-                    self.startTimer(maxIntervals: self.maxIntervals, restTime: Double(self.restTimeSelected))
+                    self.startTimer(maxIntervals: self.intervalSelected, restTime: Double(self.restTimeSelected))
                 }){
                     Text("Start")
                 }
@@ -70,14 +78,14 @@ struct ContentView: View {
     }
     
     func startTimer(maxIntervals: Int, restTime: Double) {
-        guard self.timer == nil else { return }
+        guard self.intervalTimer == nil else { return }
         
-
+        
         var startingIntervals = 0
         cornerLabel = "Ready!"
         workoutInProgess = true
         
-        self.timer = Timer.scheduledTimer(withTimeInterval: restTime, repeats: true){
+        self.intervalTimer = Timer.scheduledTimer(withTimeInterval: restTime, repeats: true){
             timer in
             if startingIntervals < maxIntervals {
                 self.chooseAndSpeakRandomCorner()
@@ -88,16 +96,21 @@ struct ContentView: View {
                 
                 self.utterTextToSpeech(utteredText: finishMessage)
                 
-                self.stopTimer()
+                self.stopIntervalTimer()
             }
         }
     }
     
-    func stopTimer(){
-        workoutInProgess = false;
+    func stopIntervalTimer(){
+        
         speech.stopSpeaking(at: .word)
-        timer?.invalidate()
-        timer = Timer()
+        intervalTimer?.invalidate()
+        intervalTimer = Timer()
+        
+        // TODO: put workout in progress in stop Round Timer
+        
+        workoutInProgess = false
+      
     }
     
     
