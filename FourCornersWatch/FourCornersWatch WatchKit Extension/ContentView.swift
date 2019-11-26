@@ -12,18 +12,21 @@ import AVFoundation
 struct ContentView: View {
     @State private var cornerLabel = "Ready!"
     @State private var workoutInProgess = false
+    
+    
+    // Set Interval Values
     @State private var intervalTimer : Timer? = Timer()
-    @State private var restTimeIndex: Int = 0
+    @State private var intervalRestTimeIndex: Int = 0
     @State private var intervalIndex : Int = 0
     
-    let minimumRestTimeInSeconds = 3
+    let minimumIntervalRestTimeInSeconds = 3
     let minimumIntervals = 10
     
-    var restTimeSelected : Int {
-        return restTimeIndex + minimumRestTimeInSeconds
+    var intervalRestTimeValue : Int {
+        return intervalRestTimeIndex + minimumIntervalRestTimeInSeconds
     }
     
-    var intervalSelected : Int {
+    var intervalValue : Int {
         return intervalIndex + minimumIntervals
     }
     
@@ -43,8 +46,8 @@ struct ContentView: View {
             } else {
                 
                 Form{
-                    Picker("Rest", selection: $restTimeIndex) {
-                        ForEach(minimumRestTimeInSeconds ..< 11) {
+                    Picker("Rest", selection: $intervalRestTimeIndex) {
+                        ForEach(minimumIntervalRestTimeInSeconds ..< 11) {
                             Text("\($0) seconds")
                         }
                     }
@@ -57,7 +60,7 @@ struct ContentView: View {
                     
                 }
                 Button(action: {
-                    self.startTimer(maxIntervals: self.intervalSelected, restTime: Double(self.restTimeSelected))
+                    self.startIntervalTimer(intervals: self.intervalValue, restTime: Double(self.intervalRestTimeValue))
                 }){
                     Text("Start")
                 }
@@ -77,17 +80,19 @@ struct ContentView: View {
         utterTextToSpeech(utteredText: chosenDirection)
     }
     
-    func startTimer(maxIntervals: Int, restTime: Double) {
+    func startIntervalTimer(intervals: Int, restTime: Double) {
         guard self.intervalTimer == nil else { return }
         
-        
-        var startingIntervals = 0
+        // need to move to round timer.
         cornerLabel = "Ready!"
         workoutInProgess = true
         
+        var startingIntervals = 0
+      
+        
         self.intervalTimer = Timer.scheduledTimer(withTimeInterval: restTime, repeats: true){
             timer in
-            if startingIntervals < maxIntervals {
+            if startingIntervals < intervals {
                 self.chooseAndSpeakRandomCorner()
                 startingIntervals += 1
             } else {
