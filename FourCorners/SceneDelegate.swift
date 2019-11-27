@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  FourCorners
 //
-//  Created by Anaru Herbert on 17/11/19.
+//  Created by Anaru Herbert on 27/11/19.
 //  Copyright © 2019 Anaru Herbert. All rights reserved.
 //
 
