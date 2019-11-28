@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  FourCorners
+//  FourCorners WatchKit Extension
 //
-//  Created by Anaru Herbert on 27/11/19.
+//  Created by Anaru Herbert on 28/11/19.
 //  Copyright © 2019 Anaru Herbert. All rights reserved.
 //
 
@@ -55,23 +55,19 @@ struct ContentView: View {
     var body: some View {
         VStack{
             if workoutInProgess {
-                GeometryReader { geometry in
-                    Text(self.cornerLabel)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .frame(height: geometry.size.height / 2)
-                }
-                    
+                Text(cornerLabel)
+                    .font(.title)
                 Button(action: {
                     self.stopWorkout()
                 }){
-                    TimerButton(textMessage: "Stop", gradient: LinearGradient(gradient: Gradient(colors: [Color.orange, Color.red]), startPoint: .leading, endPoint: .trailing))
+                    Text("Stop")
                     
                 }
             } else {
+                
                 Form{
-                    Section(header: Text("Intervals").font(.headline)) {
-                        Picker("Total", selection: $intervalIndex) {
+                    HStack {
+                        Picker("Intervals", selection: $intervalIndex) {
                             ForEach(minimumIntervals ..< 21) {
                                 Text("\($0)")
                             }
@@ -82,9 +78,9 @@ struct ContentView: View {
                             }
                         }
                     }
-                    Section(header: Text("Rounds").font(.headline)) {
-                        
-                        Picker("Total", selection: $roundIndex) {
+                    
+                    HStack {
+                        Picker("Rounds", selection: $roundIndex) {
                             ForEach(minimumRounds ..< 12) {
                                 Text("\($0)")
                             }
@@ -95,25 +91,21 @@ struct ContentView: View {
                             }
                         }
                     }
-                    
+                }
+                Group {
+                    Button(action: {
+                        self.startTimer(intervals: self.intervalValue, rounds: self.roundsValue, intervalRestTime: Double(self.intervalRestTimeValue), roundRestTime: Double(self.roundRestTimeValue))
+                        }){
+                        Text("Start")
+                    }
+
                     
                 }
                 
-                Button(action: {
-                    self.startTimer(intervals: self.intervalValue
-                        , rounds: self.roundsValue
-                        , intervalRestTime: Double(self.intervalRestTimeValue)
-                        , roundRestTime: Double(self.roundRestTimeValue))
-                }){
-                    TimerButton(textMessage: "Start")
-                      
-                
-                }
                 
             }
+            
         }
-        
-        
     }
     
     func chooseAndSpeakRandomCorner() {
@@ -146,7 +138,6 @@ struct ContentView: View {
             } else {
                 self.cornerLabel = "R\(self.currentRoundCount) Done"
                 self.utterTextToSpeech(utteredText: "Round \(self.currentRoundCount + 1) Done.")
-                
                 self.stopIntervalTimer()
                 
                 if self.currentRoundCount < rounds {
@@ -160,13 +151,14 @@ struct ContentView: View {
                 }
             }
         }
-        
+    
     }
     
     
     
     
     func stopIntervalTimer(){
+        speech.stopSpeaking(at: .word)
         intervalTimer?.invalidate()
         intervalTimer = Timer()
         
@@ -175,6 +167,8 @@ struct ContentView: View {
     
     func stopWorkout() {
         workoutInProgess = false
+        
+        speech.stopSpeaking(at: .word)
         
         intervalTimer?.invalidate()
         intervalTimer = Timer()
@@ -191,28 +185,8 @@ struct ContentView: View {
     }
 }
 
-
-
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-    }
-}
-
-struct TimerButton: View {
-    var textMessage: String = ""
-    var gradient = LinearGradient(gradient: Gradient(colors: [Color.blue, Color.green]), startPoint: .leading, endPoint: .trailing)
-    
-    var body: some View {
-        Text(textMessage)
-            .foregroundColor(.white)
-            .font(.title)
-            .frame(minWidth: 0, maxWidth: .infinity)
-            .padding(20.0)
-            .background(gradient)
-            .cornerRadius(40)
-            .padding(.horizontal, 20)
-            .padding(.bottom, 20)
     }
 }

@@ -1,0 +1,648 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A3BB04B1238FD48E00699069 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB04B0238FD48E00699069 /* AppDelegate.swift */; };
+		A3BB04B3238FD48E00699069 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB04B2238FD48E00699069 /* SceneDelegate.swift */; };
+		A3BB04B5238FD48E00699069 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB04B4238FD48E00699069 /* ContentView.swift */; };
+		A3BB04B7238FD48F00699069 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3BB04B6238FD48F00699069 /* Assets.xcassets */; };
+		A3BB04BA238FD48F00699069 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3BB04B9238FD48F00699069 /* Preview Assets.xcassets */; };
+		A3BB04BD238FD48F00699069 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3BB04BB238FD48F00699069 /* LaunchScreen.storyboard */; };
+		A3BB04C2238FD48F00699069 /* FourCorners WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A3BB04C1238FD48F00699069 /* FourCorners WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A3BB04C8238FD48F00699069 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3BB04C6238FD48F00699069 /* Interface.storyboard */; };
+		A3BB04CA238FD49000699069 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3BB04C9238FD49000699069 /* Assets.xcassets */; };
+		A3BB04D1238FD49000699069 /* FourCorners WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A3BB04D0238FD49000699069 /* FourCorners WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A3BB04D6238FD49000699069 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB04D5238FD49000699069 /* ContentView.swift */; };
+		A3BB04D8238FD49000699069 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB04D7238FD49000699069 /* HostingController.swift */; };
+		A3BB04DA238FD49000699069 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BB04D9238FD49000699069 /* ExtensionDelegate.swift */; };
+		A3BB04DC238FD49000699069 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3BB04DB238FD49000699069 /* Assets.xcassets */; };
+		A3BB04DF238FD49000699069 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3BB04DE238FD49000699069 /* Preview Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A3BB04C3238FD48F00699069 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A3BB04A5238FD48E00699069 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A3BB04C0238FD48F00699069;
+			remoteInfo = "FourCorners WatchKit App";
+		};
+		A3BB04D2238FD49000699069 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A3BB04A5238FD48E00699069 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A3BB04CF238FD49000699069;
+			remoteInfo = "FourCorners WatchKit Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A3BB04E6238FD49000699069 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A3BB04D1238FD49000699069 /* FourCorners WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3BB04EA238FD49000699069 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				A3BB04C2238FD48F00699069 /* FourCorners WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A3BB04AD238FD48E00699069 /* FourCorners.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FourCorners.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3BB04B0238FD48E00699069 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A3BB04B2238FD48E00699069 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		A3BB04B4238FD48E00699069 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A3BB04B6238FD48F00699069 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A3BB04B9238FD48F00699069 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A3BB04BC238FD48F00699069 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A3BB04BE238FD48F00699069 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3BB04C1238FD48F00699069 /* FourCorners WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FourCorners WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3BB04C7238FD48F00699069 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		A3BB04C9238FD49000699069 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A3BB04CB238FD49000699069 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3BB04D0238FD49000699069 /* FourCorners WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "FourCorners WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3BB04D5238FD49000699069 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A3BB04D7238FD49000699069 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
+		A3BB04D9238FD49000699069 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		A3BB04DB238FD49000699069 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A3BB04DE238FD49000699069 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A3BB04E0238FD49000699069 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A3BB04AA238FD48E00699069 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3BB04CD238FD49000699069 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A3BB04A4238FD48E00699069 = {
+			isa = PBXGroup;
+			children = (
+				A3BB04AF238FD48E00699069 /* FourCorners */,
+				A3BB04C5238FD48F00699069 /* FourCorners WatchKit App */,
+				A3BB04D4238FD49000699069 /* FourCorners WatchKit Extension */,
+				A3BB04AE238FD48E00699069 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A3BB04AE238FD48E00699069 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A3BB04AD238FD48E00699069 /* FourCorners.app */,
+				A3BB04C1238FD48F00699069 /* FourCorners WatchKit App.app */,
+				A3BB04D0238FD49000699069 /* FourCorners WatchKit Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A3BB04AF238FD48E00699069 /* FourCorners */ = {
+			isa = PBXGroup;
+			children = (
+				A3BB04B0238FD48E00699069 /* AppDelegate.swift */,
+				A3BB04B2238FD48E00699069 /* SceneDelegate.swift */,
+				A3BB04B4238FD48E00699069 /* ContentView.swift */,
+				A3BB04B6238FD48F00699069 /* Assets.xcassets */,
+				A3BB04BB238FD48F00699069 /* LaunchScreen.storyboard */,
+				A3BB04BE238FD48F00699069 /* Info.plist */,
+				A3BB04B8238FD48F00699069 /* Preview Content */,
+			);
+			path = FourCorners;
+			sourceTree = "<group>";
+		};
+		A3BB04B8238FD48F00699069 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A3BB04B9238FD48F00699069 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A3BB04C5238FD48F00699069 /* FourCorners WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				A3BB04C6238FD48F00699069 /* Interface.storyboard */,
+				A3BB04C9238FD49000699069 /* Assets.xcassets */,
+				A3BB04CB238FD49000699069 /* Info.plist */,
+			);
+			path = "FourCorners WatchKit App";
+			sourceTree = "<group>";
+		};
+		A3BB04D4238FD49000699069 /* FourCorners WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				A3BB04D5238FD49000699069 /* ContentView.swift */,
+				A3BB04D7238FD49000699069 /* HostingController.swift */,
+				A3BB04D9238FD49000699069 /* ExtensionDelegate.swift */,
+				A3BB04DB238FD49000699069 /* Assets.xcassets */,
+				A3BB04E0238FD49000699069 /* Info.plist */,
+				A3BB04DD238FD49000699069 /* Preview Content */,
+			);
+			path = "FourCorners WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		A3BB04DD238FD49000699069 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A3BB04DE238FD49000699069 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A3BB04AC238FD48E00699069 /* FourCorners */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3BB04EB238FD49000699069 /* Build configuration list for PBXNativeTarget "FourCorners" */;
+			buildPhases = (
+				A3BB04A9238FD48E00699069 /* Sources */,
+				A3BB04AA238FD48E00699069 /* Frameworks */,
+				A3BB04AB238FD48E00699069 /* Resources */,
+				A3BB04EA238FD49000699069 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A3BB04C4238FD48F00699069 /* PBXTargetDependency */,
+			);
+			name = FourCorners;
+			productName = FourCorners;
+			productReference = A3BB04AD238FD48E00699069 /* FourCorners.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A3BB04C0238FD48F00699069 /* FourCorners WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3BB04E7238FD49000699069 /* Build configuration list for PBXNativeTarget "FourCorners WatchKit App" */;
+			buildPhases = (
+				A3BB04BF238FD48F00699069 /* Resources */,
+				A3BB04E6238FD49000699069 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A3BB04D3238FD49000699069 /* PBXTargetDependency */,
+			);
+			name = "FourCorners WatchKit App";
+			productName = "FourCorners WatchKit App";
+			productReference = A3BB04C1238FD48F00699069 /* FourCorners WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		A3BB04CF238FD49000699069 /* FourCorners WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3BB04E3238FD49000699069 /* Build configuration list for PBXNativeTarget "FourCorners WatchKit Extension" */;
+			buildPhases = (
+				A3BB04CC238FD49000699069 /* Sources */,
+				A3BB04CD238FD49000699069 /* Frameworks */,
+				A3BB04CE238FD49000699069 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FourCorners WatchKit Extension";
+			productName = "FourCorners WatchKit Extension";
+			productReference = A3BB04D0238FD49000699069 /* FourCorners WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A3BB04A5238FD48E00699069 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1120;
+				LastUpgradeCheck = 1120;
+				ORGANIZATIONNAME = "Anaru Herbert";
+				TargetAttributes = {
+					A3BB04AC238FD48E00699069 = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
+					A3BB04C0238FD48F00699069 = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
+					A3BB04CF238FD49000699069 = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
+				};
+			};
+			buildConfigurationList = A3BB04A8238FD48E00699069 /* Build configuration list for PBXProject "FourCorners" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A3BB04A4238FD48E00699069;
+			productRefGroup = A3BB04AE238FD48E00699069 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A3BB04AC238FD48E00699069 /* FourCorners */,
+				A3BB04C0238FD48F00699069 /* FourCorners WatchKit App */,
+				A3BB04CF238FD49000699069 /* FourCorners WatchKit Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A3BB04AB238FD48E00699069 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3BB04BD238FD48F00699069 /* LaunchScreen.storyboard in Resources */,
+				A3BB04BA238FD48F00699069 /* Preview Assets.xcassets in Resources */,
+				A3BB04B7238FD48F00699069 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3BB04BF238FD48F00699069 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3BB04CA238FD49000699069 /* Assets.xcassets in Resources */,
+				A3BB04C8238FD48F00699069 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3BB04CE238FD49000699069 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3BB04DF238FD49000699069 /* Preview Assets.xcassets in Resources */,
+				A3BB04DC238FD49000699069 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A3BB04A9238FD48E00699069 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3BB04B1238FD48E00699069 /* AppDelegate.swift in Sources */,
+				A3BB04B3238FD48E00699069 /* SceneDelegate.swift in Sources */,
+				A3BB04B5238FD48E00699069 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3BB04CC238FD49000699069 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3BB04D8238FD49000699069 /* HostingController.swift in Sources */,
+				A3BB04D6238FD49000699069 /* ContentView.swift in Sources */,
+				A3BB04DA238FD49000699069 /* ExtensionDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A3BB04C4238FD48F00699069 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A3BB04C0238FD48F00699069 /* FourCorners WatchKit App */;
+			targetProxy = A3BB04C3238FD48F00699069 /* PBXContainerItemProxy */;
+		};
+		A3BB04D3238FD49000699069 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A3BB04CF238FD49000699069 /* FourCorners WatchKit Extension */;
+			targetProxy = A3BB04D2238FD49000699069 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A3BB04BB238FD48F00699069 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A3BB04BC238FD48F00699069 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A3BB04C6238FD48F00699069 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A3BB04C7238FD48F00699069 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A3BB04E1238FD49000699069 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A3BB04E2238FD49000699069 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A3BB04E4238FD49000699069 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"FourCorners WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 2KG9NR622V;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "FourCorners WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.AnaruHerbert.FourCorners.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+			};
+			name = Debug;
+		};
+		A3BB04E5238FD49000699069 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"FourCorners WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 2KG9NR622V;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "FourCorners WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.AnaruHerbert.FourCorners.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+			};
+			name = Release;
+		};
+		A3BB04E8238FD49000699069 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2KG9NR622V;
+				IBSC_MODULE = FourCorners_WatchKit_Extension;
+				INFOPLIST_FILE = "FourCorners WatchKit App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.AnaruHerbert.FourCorners.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+			};
+			name = Debug;
+		};
+		A3BB04E9238FD49000699069 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2KG9NR622V;
+				IBSC_MODULE = FourCorners_WatchKit_Extension;
+				INFOPLIST_FILE = "FourCorners WatchKit App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.AnaruHerbert.FourCorners.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.1;
+			};
+			name = Release;
+		};
+		A3BB04EC238FD49000699069 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"FourCorners/Preview Content\"";
+				DEVELOPMENT_TEAM = 2KG9NR622V;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = FourCorners/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.AnaruHerbert.FourCorners;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A3BB04ED238FD49000699069 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"FourCorners/Preview Content\"";
+				DEVELOPMENT_TEAM = 2KG9NR622V;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = FourCorners/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.AnaruHerbert.FourCorners;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A3BB04A8238FD48E00699069 /* Build configuration list for PBXProject "FourCorners" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3BB04E1238FD49000699069 /* Debug */,
+				A3BB04E2238FD49000699069 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A3BB04E3238FD49000699069 /* Build configuration list for PBXNativeTarget "FourCorners WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3BB04E4238FD49000699069 /* Debug */,
+				A3BB04E5238FD49000699069 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A3BB04E7238FD49000699069 /* Build configuration list for PBXNativeTarget "FourCorners WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3BB04E8238FD49000699069 /* Debug */,
+				A3BB04E9238FD49000699069 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A3BB04EB238FD49000699069 /* Build configuration list for PBXNativeTarget "FourCorners" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3BB04EC238FD49000699069 /* Debug */,
+				A3BB04ED238FD49000699069 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A3BB04A5238FD48E00699069 /* Project object */;
+}
