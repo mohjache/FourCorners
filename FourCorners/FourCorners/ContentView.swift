@@ -163,8 +163,8 @@ struct ContentView: View {
                 self.chooseAndSpeakRandomCorner()
                 startingIntervals += 1
             } else {
-                self.cornerLabel = "R\(self.currentRoundCount) Done"
-                self.utterTextToSpeech(utteredText: "Round \(self.currentRoundCount) Done.")
+                self.cornerLabel = "R\(self.currentRoundCount) Complete"
+                self.utterTextToSpeech(utteredText: "Round \(self.currentRoundCount) Complete.")
                 
                 self.stopIntervalTimer()
                 
@@ -194,12 +194,17 @@ struct ContentView: View {
     
     func stopWorkout() {
         workoutInProgess = false
+        self.utterTextToSpeech(utteredText: "Workout Complete!")
+        
+        
         
         intervalTimer?.invalidate()
         intervalTimer = Timer()
         
         roundTimer?.invalidate()
         roundTimer = Timer()
+        
+        self.speech.stopSpeaking(at: .word)
     }
     
     
