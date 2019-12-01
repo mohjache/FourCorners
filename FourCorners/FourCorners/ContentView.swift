@@ -30,6 +30,18 @@ struct ContentView: View {
         return intervalIndex + minimumIntervals
     }
     
+    var totalTime : String {
+        let totalTimerInt = intervalRestTimeValue * intervalValue * roundsValue + roundRestTimeValue + roundsValue
+        
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .abbreviated
+
+        let formattedString = formatter.string(from: TimeInterval(totalTimerInt))!
+        
+        return formattedString
+    }
+    
     //Set Round Values
     @State private var roundTimer : Timer? = Timer()
     @State private var roundRestTimeIndex : Int = 0
@@ -50,65 +62,75 @@ struct ContentView: View {
     let speech = AVSpeechSynthesizer()
     
     var body: some View {
-        NavigationView {
-            VStack{
-                if workoutInProgess {
-                    GeometryReader { geometry in
-                        Text(self.cornerLabel)
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .frame(height: geometry.size.height / 2)
-                    }
-                    
-                    Button(action: {
-                        self.stopWorkout()
-                    }){
-                        TimerButton(textMessage: "Stop", gradient: LinearGradient(gradient: Gradient(colors: [Color.orange, Color.red]), startPoint: .leading, endPoint: .trailing))
-                        
-                    }
-                } else {
-                    Form{
-                        Section(header: Text("Intervals").font(.headline)) {
-                            Picker("Total", selection: $intervalIndex) {
-                                ForEach(minimumIntervals ..< 21) {
-                                    Text("\($0)")
-                                }
-                            }
-                            Picker("Rest", selection: $intervalRestTimeIndex) {
-                                ForEach(minimumIntervalRestTimeInSeconds ..< 11) {
-                                    Text("\($0)s")
-                                }
-                            }
-                        }
-                        Section(header: Text("Rounds").font(.headline)) {
-                            
-                            Picker("Total", selection: $roundIndex) {
-                                ForEach(minimumRounds ..< 12) {
-                                    Text("\($0)")
-                                }
-                            }
-                            Picker("Rest", selection: $roundRestTimeIndex) {
-                                ForEach(minimumRoundRestTimeInSeconds ..< 60) {
-                                    Text("\($0)s")
-                                }
-                            }
-                        }
-                        
-                        
-                    }
-                    
-                    Button(action: {
-                        self.startTimer(intervals: self.intervalValue
-                            , rounds: self.roundsValue
-                            , intervalRestTime: Double(self.intervalRestTimeValue)
-                            , roundRestTime: Double(self.roundRestTimeValue))
-                    }){
-                        TimerButton(textMessage: "Start")
-                    }
+        VStack{
+            if workoutInProgess {
+                GeometryReader { geometry in
+                    Text(self.cornerLabel)
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .frame(height: geometry.size.height / 2)
+                }
+                
+                Button(action: {
+                    self.stopWorkout()
+                }){
+                    TimerButton(textMessage: "Stop", gradient: LinearGradient(gradient: Gradient(colors: [Color.orange, Color.red]), startPoint: .leading, endPoint: .trailing))
                     
                 }
-            }.navigationBarTitle(Text("Four Corners"))
+            } else {
+                NavigationView{
+                Form{
+                    Section(header: Text("Intervals").font(.headline)) {
+                        Picker("Total", selection: $intervalIndex) {
+                            ForEach(minimumIntervals ..< 21) {
+                                Text("\($0)")
+                            }
+                        }
+                        
+                        Picker("Rest", selection: $intervalRestTimeIndex) {
+                            ForEach(minimumIntervalRestTimeInSeconds ..< 11) {
+                                Text("\($0)s")
+                            }
+                        }
+                    }
+                    Section(header: Text("Rounds").font(.headline)) {
+                        
+                        Picker("Total", selection: $roundIndex) {
+                            ForEach(minimumRounds ..< 12) {
+                                Text("\($0)")
+                            }
+                        }
+                        Picker("Rest", selection: $roundRestTimeIndex) {
+                            ForEach(minimumRoundRestTimeInSeconds ..< 60) {
+                                Text("\($0)s")
+                            }
+                        }
+                    }
+                    
+                    Section(header: Text("Total Time").font(.headline)){
+                        Text("\(totalTime)")
+                            .font(.title)
+                            .bold()
+                    }
+                    
+                    
+                    }.navigationBarTitle("FourCorners")
+                
+                }
+                
+                Button(action: {
+                    self.startTimer(intervals: self.intervalValue
+                        , rounds: self.roundsValue
+                        , intervalRestTime: Double(self.intervalRestTimeValue)
+                        , roundRestTime: Double(self.roundRestTimeValue))
+                }){
+                    TimerButton(textMessage: "Start")
+                }
+                
+            }
+                
         }
+        
         
         
     }
@@ -206,7 +228,7 @@ struct TimerButton: View {
             .padding(20.0)
             .background(gradient)
             .cornerRadius(40)
-            .padding(.horizontal, 20)
-            .padding(.bottom, 20)
+            .padding()
+        
     }
 }
