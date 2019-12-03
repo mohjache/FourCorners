@@ -9,6 +9,16 @@
 import SwiftUI
 import AVFoundation
 
+struct TimedSpokenInterval {
+    var intervalInSeconds: Double;
+    var message : String;
+    
+    init(intervalInSeconds: Double, message: String) {
+        self.intervalInSeconds = intervalInSeconds
+        self.message = message
+    }
+}
+
 struct ContentView: View {
     @State private var cornerLabel = "Ready!"
     @State private var workoutInProgess = false
@@ -43,10 +53,10 @@ struct ContentView: View {
     }
     
     //Set Round Values
-    @State private var roundTimer : Timer? = Timer()
+    //@State private var roundTimer : Timer? = Timer()
     @State private var roundRestTimeIndex : Int = 0
     @State private var roundIndex : Int = 4
-    @State private var currentRoundCount : Int  = 1
+    @State private var currentRoundCount : Int  = 0
     
     let minimumRoundRestTimeInSeconds = 10 // up to 59 second
     let minimumRounds = 4 // go up to 12
@@ -58,8 +68,11 @@ struct ContentView: View {
     var roundsValue : Int {
         return roundIndex + minimumRounds
     }
-    
+    // speech stuff
     let speech = AVSpeechSynthesizer()
+    
+    // timedIntervals
+    @State private var timedIntervalCollection = [TimedSpokenInterval]()
     
     var body: some View {
         VStack{
@@ -119,10 +132,8 @@ struct ContentView: View {
                 }
                 
                 Button(action: {
-                    self.startTimer(intervals: self.intervalValue
-                        , rounds: self.roundsValue
-                        , intervalRestTime: Double(self.intervalRestTimeValue)
-                        , roundRestTime: Double(self.roundRestTimeValue))
+                    self.timedIntervalCollection = self.createTimedIntervalsCollection()
+                    self.startTimer()
                 }){
                     TimerButton(textMessage: "Start")
                 }
@@ -142,74 +153,93 @@ struct ContentView: View {
         
         self.cornerLabel = chosenDirection
         
-        utterTextToSpeech(utteredText: chosenDirection)
+        self.utterTextToSpeech(utteredText: chosenDirection)
+    }
+    
+    func chooseRandomCorner() -> String {
+        let directions = ["Front Left", "Front Right", "Back Left", "Back Right"]
+        let randomNumber = Int.random(in: 0 ... 3)
+        let chosenDirection = directions[randomNumber]
+        
+        return chosenDirection
     }
     
     
-    func startTimer(intervals: Int, rounds: Int, intervalRestTime: Double, roundRestTime: Double) {
-        guard self.intervalTimer == nil else { return }
-        
-        cornerLabel = "Ready!"
-        self.utterTextToSpeech(utteredText: cornerLabel)
-        
+    func startTimer() {
         workoutInProgess = true
+    
+        let maxCount = self.timedIntervalCollection.count
         
-        var startingIntervals = 0
-        
-        
-        self.intervalTimer = Timer.scheduledTimer(withTimeInterval: intervalRestTime, repeats: true){
-            timer in
-            if startingIntervals < intervals {
-                self.chooseAndSpeakRandomCorner()
-                startingIntervals += 1
-            } else {
-                self.cornerLabel = "R\(self.currentRoundCount) Complete"
-                self.utterTextToSpeech(utteredText: "Round \(self.currentRoundCount) Complete.")
+        if self.currentRoundCount < maxCount {
+            
+            self.intervalTimer = Timer.scheduledTimer(withTimeInterval: self.timedIntervalCollection[self.currentRoundCount].intervalInSeconds, repeats: false){
+                timer in
                 
-                self.stopIntervalTimer()
+                self.cornerLabel = self.timedIntervalCollection[self.currentRoundCount].message
                 
-                if self.currentRoundCount < rounds {
-                    self.roundTimer = Timer.scheduledTimer(withTimeInterval: roundRestTime, repeats: false){
-                        timer in
-                        self.currentRoundCount += 1
-                        self.startTimer(intervals: self.intervalValue, rounds: self.roundsValue, intervalRestTime: Double(self.intervalRestTimeValue), roundRestTime: Double(self.roundRestTimeValue))
-                    }
-                } else {
-                    self.stopWorkout()
-                }
+                self.utterTextToSpeech(utteredText: self.cornerLabel)
+                
+                self.intervalTimer?.invalidate()
+                self.currentRoundCount += 1
+                
+                self.startTimer()
+                
             }
+            
+            
         }
         
     }
     
     
-    
-    
-    func stopIntervalTimer(){
-        intervalTimer?.invalidate()
-        intervalTimer = Timer()
+    func createTimedIntervalsCollection() -> [TimedSpokenInterval]{
         
-        // TODO: put workout in progress in stop Round Timer
+        var timedIntervalCollection = [TimedSpokenInterval]()
+        
+        let firstRound = TimedSpokenInterval.init(intervalInSeconds: 1.0, message: "Round 1")
+        
+        timedIntervalCollection.append(firstRound)
+
+        
+        for roundNumber in 0 ..< self.roundsValue {
+            
+            if roundNumber != 0 {
+            let beginningRound = TimedSpokenInterval.init(intervalInSeconds: Double(self.roundRestTimeValue), message: "Round \(roundNumber + 1)")
+                
+            
+            timedIntervalCollection.append(beginningRound)
+            }
+            
+            for _ in 0 ..< self.intervalValue {
+                let randomCorner = self.chooseRandomCorner()
+                
+                let timedInterval = TimedSpokenInterval.init(intervalInSeconds: Double(self.intervalRestTimeValue), message: randomCorner)
+                
+                timedIntervalCollection.append(timedInterval)
+            }
+            
+            let restNotification = TimedSpokenInterval.init(intervalInSeconds: Double(1.0), message: "Rest for \(self.roundRestTimeValue) seconds.")
+            
+           timedIntervalCollection.append(restNotification)
+            
+        }
+
+        return timedIntervalCollection
     }
     
     func stopWorkout() {
         workoutInProgess = false
         self.utterTextToSpeech(utteredText: "Workout Complete!")
         
-        
-        
         intervalTimer?.invalidate()
         intervalTimer = Timer()
-        
-        roundTimer?.invalidate()
-        roundTimer = Timer()
         
         self.speech.stopSpeaking(at: .word)
     }
     
     
     
-    private func utterTextToSpeech(utteredText: String) {
+    func utterTextToSpeech(utteredText: String) {
         let utterance = AVSpeechUtterance(string: utteredText)
         self.speech.speak(utterance)
     }
