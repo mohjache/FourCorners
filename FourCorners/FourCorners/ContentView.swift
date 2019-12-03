@@ -166,8 +166,9 @@ struct ContentView: View {
     
     
     func startTimer() {
+        guard self.intervalTimer == nil else { return }
         workoutInProgess = true
-    
+        
         let maxCount = self.timedIntervalCollection.count
         
         if self.currentRoundCount < maxCount {
@@ -180,6 +181,7 @@ struct ContentView: View {
                 self.utterTextToSpeech(utteredText: self.cornerLabel)
                 
                 self.intervalTimer?.invalidate()
+                self.intervalTimer = Timer()
                 self.currentRoundCount += 1
                 
                 self.startTimer()
@@ -187,6 +189,8 @@ struct ContentView: View {
             }
             
             
+        }else {
+            self.stopWorkout()
         }
         
     }
@@ -199,15 +203,15 @@ struct ContentView: View {
         let firstRound = TimedSpokenInterval.init(intervalInSeconds: 1.0, message: "Round 1")
         
         timedIntervalCollection.append(firstRound)
-
+        
         
         for roundNumber in 0 ..< self.roundsValue {
             
             if roundNumber != 0 {
-            let beginningRound = TimedSpokenInterval.init(intervalInSeconds: Double(self.roundRestTimeValue), message: "Round \(roundNumber + 1)")
+                let beginningRound = TimedSpokenInterval.init(intervalInSeconds: Double(self.roundRestTimeValue), message: "Round \(roundNumber + 1)")
                 
-            
-            timedIntervalCollection.append(beginningRound)
+                
+                timedIntervalCollection.append(beginningRound)
             }
             
             for _ in 0 ..< self.intervalValue {
@@ -218,12 +222,12 @@ struct ContentView: View {
                 timedIntervalCollection.append(timedInterval)
             }
             
-            let restNotification = TimedSpokenInterval.init(intervalInSeconds: Double(1.0), message: "Rest for \(self.roundRestTimeValue) seconds.")
+            let restNotification = TimedSpokenInterval.init(intervalInSeconds: Double(self.intervalRestTimeValue), message: "Rest for \(self.roundRestTimeValue) seconds.")
             
-           timedIntervalCollection.append(restNotification)
+            timedIntervalCollection.append(restNotification)
             
         }
-
+        
         return timedIntervalCollection
     }
     
