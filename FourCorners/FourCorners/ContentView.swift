@@ -36,7 +36,7 @@ struct ContentView: View {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
         formatter.unitsStyle = .abbreviated
-
+        
         let formattedString = formatter.string(from: TimeInterval(totalTimerInt))!
         
         return formattedString
@@ -79,43 +79,43 @@ struct ContentView: View {
                 }
             } else {
                 NavigationView{
-                Form{
-                    Section(header: Text("Intervals").font(.headline)) {
-                        Picker("Total", selection: $intervalIndex) {
-                            ForEach(minimumIntervals ..< 21) {
-                                Text("\($0)")
+                    Form{
+                        Section(header: Text("Intervals").font(.headline)) {
+                            Picker("Total", selection: $intervalIndex) {
+                                ForEach(minimumIntervals ..< 21) {
+                                    Text("\($0)")
+                                }
+                            }
+                            
+                            Picker("Rest", selection: $intervalRestTimeIndex) {
+                                ForEach(minimumIntervalRestTimeInSeconds ..< 11) {
+                                    Text("\($0)s")
+                                }
+                            }
+                        }
+                        Section(header: Text("Rounds").font(.headline)) {
+                            
+                            Picker("Total", selection: $roundIndex) {
+                                ForEach(minimumRounds ..< 12) {
+                                    Text("\($0)")
+                                }
+                            }
+                            Picker("Rest", selection: $roundRestTimeIndex) {
+                                ForEach(minimumRoundRestTimeInSeconds ..< 60) {
+                                    Text("\($0)s")
+                                }
                             }
                         }
                         
-                        Picker("Rest", selection: $intervalRestTimeIndex) {
-                            ForEach(minimumIntervalRestTimeInSeconds ..< 11) {
-                                Text("\($0)s")
-                            }
+                        Section(header: Text("Total Time").font(.headline)){
+                            Text("\(totalTime)")
+                                .font(.title)
+                                .bold()
                         }
-                    }
-                    Section(header: Text("Rounds").font(.headline)) {
                         
-                        Picker("Total", selection: $roundIndex) {
-                            ForEach(minimumRounds ..< 12) {
-                                Text("\($0)")
-                            }
-                        }
-                        Picker("Rest", selection: $roundRestTimeIndex) {
-                            ForEach(minimumRoundRestTimeInSeconds ..< 60) {
-                                Text("\($0)s")
-                            }
-                        }
-                    }
-                    
-                    Section(header: Text("Total Time").font(.headline)){
-                        Text("\(totalTime)")
-                            .font(.title)
-                            .bold()
-                    }
-                    
-                    
+                        
                     }.navigationBarTitle("FourCorners")
-                
+                    
                 }
                 
                 Button(action: {
@@ -128,7 +128,7 @@ struct ContentView: View {
                 }
                 
             }
-                
+            
         }
         
         
