@@ -9,19 +9,22 @@
 import SwiftUI
 import AVFoundation
 
-
-struct ContentView: View {
-    @State private var cornerLabel = "Ready!"
-    @State private var workoutInProgess = false
+class FourCornersViewModel: ObservableObject {
+    @Published var cornerLabel = "Ready!"
+    @Published var workoutInProgress = false
     
+    @Published var intervalTimer : Timer? = Timer()
+    @Published var intervalRestTimeIndex: Int = 0
+    @Published var intervalIndex : Int = 0
     
-    // Set Interval Values
-    @State private var intervalTimer : Timer? = Timer()
-    @State private var intervalRestTimeIndex: Int = 0
-    @State private var intervalIndex : Int = 0
+    @Published var roundRestTimeIndex : Int = 0
+    @Published var roundIndex : Int = 4
+    @Published var currentRoundCount : Int  = 1
     
-    let minimumIntervalRestTimeInSeconds = 4
-    let minimumIntervals = 5
+    @Published var minimumIntervalRestTimeInSeconds = 4
+    @Published var minimumIntervals = 5
+    @Published var minimumRoundRestTimeInSeconds = 10 // up to 59 second
+    @Published var minimumRounds = 4 // go up to 12
     
     var intervalRestTimeValue : Int {
         return intervalRestTimeIndex + minimumIntervalRestTimeInSeconds
@@ -29,6 +32,14 @@ struct ContentView: View {
     
     var intervalValue : Int {
         return intervalIndex + minimumIntervals
+    }
+    
+    var roundRestTimeValue : Int {
+        return roundRestTimeIndex + minimumRoundRestTimeInSeconds
+    }
+    
+    var roundsValue : Int {
+        return roundIndex + minimumRounds
     }
     
     var totalTime : String {
@@ -43,22 +54,13 @@ struct ContentView: View {
         return formattedString
     }
     
-    //Set Round Values
-    //@State private var roundTimer : Timer? = Timer()
-    @State private var roundRestTimeIndex : Int = 0
-    @State private var roundIndex : Int = 4
-    @State private var currentRoundCount : Int  = 0
     
-    let minimumRoundRestTimeInSeconds = 10 // up to 59 second
-    let minimumRounds = 4 // go up to 12
-    
-    var roundRestTimeValue : Int {
-        return roundRestTimeIndex + minimumRoundRestTimeInSeconds
-    }
-    
-    var roundsValue : Int {
-        return roundIndex + minimumRounds
-    }
+}
+
+
+struct ContentView: View {
+
+    @ObservedObject var fourCornersVm = FourCornersViewModel()
     // speech stuff
     let speech = AVSpeechSynthesizer()
     
@@ -67,9 +69,9 @@ struct ContentView: View {
     
     var body: some View {
         VStack{
-            if workoutInProgess {
+            if self.fourCornersVm.workoutInProgress {
                 GeometryReader { geometry in
-                    Text(self.cornerLabel)
+                    Text(self.fourCornersVm.cornerLabel)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .frame(height: geometry.size.height / 2)
@@ -85,34 +87,34 @@ struct ContentView: View {
                 NavigationView{
                     Form{
                         Section(header: Text("Intervals").font(.headline)) {
-                            Picker("Total", selection: $intervalIndex) {
-                                ForEach(minimumIntervals ..< 21) {
+                            Picker("Total", selection: self.$fourCornersVm.intervalIndex) {
+                                ForEach(self.fourCornersVm.minimumIntervals ..< 21) {
                                     Text("\($0)")
                                 }
                             }
                             
-                            Picker("Rest", selection: $intervalRestTimeIndex) {
-                                ForEach(minimumIntervalRestTimeInSeconds ..< 11) {
+                            Picker("Rest", selection: self.$fourCornersVm.intervalRestTimeIndex) {
+                                ForEach(self.fourCornersVm.minimumIntervalRestTimeInSeconds ..< 11) {
                                     Text("\($0)s")
                                 }
                             }
                         }
                         Section(header: Text("Rounds").font(.headline)) {
                             
-                            Picker("Total", selection: $roundIndex) {
-                                ForEach(minimumRounds ..< 12) {
+                            Picker("Total", selection: self.$fourCornersVm.roundIndex) {
+                                ForEach(self.fourCornersVm.minimumRounds ..< 12) {
                                     Text("\($0)")
                                 }
                             }
-                            Picker("Rest", selection: $roundRestTimeIndex) {
-                                ForEach(minimumRoundRestTimeInSeconds ..< 60) {
+                            Picker("Rest", selection: self.$fourCornersVm.roundRestTimeIndex) {
+                                ForEach(self.fourCornersVm.minimumRoundRestTimeInSeconds ..< 60) {
                                     Text("\($0)s")
                                 }
                             }
                         }
                         
                         Section(header: Text("Total Time").font(.headline)){
-                            Text("\(totalTime)")
+                            Text("\(self.fourCornersVm.totalTime)")
                                 .font(.title)
                                 .bold()
                         }
@@ -142,7 +144,7 @@ struct ContentView: View {
         let randomNumber = Int.random(in: 0 ... 3)
         let chosenDirection = directions[randomNumber]
         
-        self.cornerLabel = chosenDirection
+        self.fourCornersVm.cornerLabel = chosenDirection
         
         self.utterTextToSpeech(utteredText: chosenDirection)
     }
@@ -157,23 +159,23 @@ struct ContentView: View {
     
     
     func startTimer() {
-        guard self.intervalTimer == nil else { return }
-        workoutInProgess = true
+        guard self.fourCornersVm.intervalTimer == nil else { return }
+        self.fourCornersVm.workoutInProgress = true
         
         let maxCount = self.timedIntervalCollection.count
         
-        if self.currentRoundCount < maxCount {
+        if self.fourCornersVm.currentRoundCount < maxCount {
             
-            self.intervalTimer = Timer.scheduledTimer(withTimeInterval: self.timedIntervalCollection[self.currentRoundCount].intervalInSeconds, repeats: false){
+            self.fourCornersVm.intervalTimer = Timer.scheduledTimer(withTimeInterval: self.timedIntervalCollection[self.fourCornersVm.currentRoundCount].intervalInSeconds, repeats: false){
                 timer in
                 
-                self.cornerLabel = self.timedIntervalCollection[self.currentRoundCount].message
+                self.fourCornersVm.cornerLabel = self.timedIntervalCollection[self.fourCornersVm.currentRoundCount].message
                 
-                self.utterTextToSpeech(utteredText: self.cornerLabel)
+                self.utterTextToSpeech(utteredText: self.fourCornersVm.cornerLabel)
                 
-                self.intervalTimer?.invalidate()
-                self.intervalTimer = Timer()
-                self.currentRoundCount += 1
+                self.fourCornersVm.intervalTimer?.invalidate()
+                self.fourCornersVm.intervalTimer = Timer()
+                self.fourCornersVm.currentRoundCount += 1
                 
                 self.startTimer()
                 
@@ -196,24 +198,24 @@ struct ContentView: View {
         timedIntervalCollection.append(firstRound)
         
         
-        for roundNumber in 0 ..< self.roundsValue {
+        for roundNumber in 0 ..< self.fourCornersVm.roundsValue {
             
             if roundNumber != 0 {
-                let beginningRound = TimedSpokenInterval.init(intervalInSeconds: Double(self.roundRestTimeValue), message: "Round \(roundNumber + 1)")
+                let beginningRound = TimedSpokenInterval.init(intervalInSeconds: Double(self.fourCornersVm.roundRestTimeValue), message: "Round \(roundNumber + 1)")
                 
                 
                 timedIntervalCollection.append(beginningRound)
             }
             
-            for _ in 0 ..< self.intervalValue {
+            for _ in 0 ..< self.fourCornersVm.intervalValue {
                 let randomCorner = self.chooseRandomCorner()
                 
-                let timedInterval = TimedSpokenInterval.init(intervalInSeconds: Double(self.intervalRestTimeValue), message: randomCorner)
+                let timedInterval = TimedSpokenInterval.init(intervalInSeconds: Double(self.fourCornersVm.intervalRestTimeValue), message: randomCorner)
                 
                 timedIntervalCollection.append(timedInterval)
             }
             
-            let restNotification = TimedSpokenInterval.init(intervalInSeconds: Double(self.intervalRestTimeValue), message: "Rest for \(self.roundRestTimeValue) seconds.")
+            let restNotification = TimedSpokenInterval.init(intervalInSeconds: Double(self.fourCornersVm.intervalRestTimeValue), message: "Rest for \(self.fourCornersVm.roundRestTimeValue) seconds.")
             
             timedIntervalCollection.append(restNotification)
             
@@ -223,13 +225,13 @@ struct ContentView: View {
     }
     
     func stopWorkout() {
-        workoutInProgess = false
+        self.fourCornersVm.workoutInProgress = false
         self.utterTextToSpeech(utteredText: "Workout Complete!")
         
-        self.cornerLabel = "Ready!"
+        self.fourCornersVm.cornerLabel = "Ready!"
         
-        intervalTimer?.invalidate()
-        intervalTimer = Timer()
+        self.fourCornersVm.intervalTimer?.invalidate()
+        self.fourCornersVm.intervalTimer = Timer()
         
         self.speech.stopSpeaking(at: .word)
     }
