@@ -9,15 +9,6 @@
 import SwiftUI
 import AVFoundation
 
-struct TimedSpokenInterval {
-    var intervalInSeconds: Double;
-    var message : String;
-    
-    init(intervalInSeconds: Double, message: String) {
-        self.intervalInSeconds = intervalInSeconds
-        self.message = message
-    }
-}
 
 struct ContentView: View {
     @State private var cornerLabel = "Ready!"
@@ -235,6 +226,8 @@ struct ContentView: View {
         workoutInProgess = false
         self.utterTextToSpeech(utteredText: "Workout Complete!")
         
+        self.cornerLabel = "Ready!"
+        
         intervalTimer?.invalidate()
         intervalTimer = Timer()
         
@@ -269,5 +262,15 @@ struct TimerButton: View {
             .cornerRadius(40)
             .padding()
         
+    }
+}
+
+struct TimedSpokenInterval {
+    var intervalInSeconds: Double;
+    var message : String;
+    
+    init(intervalInSeconds: Double, message: String) {
+        self.intervalInSeconds = intervalInSeconds
+        self.message = message
     }
 }

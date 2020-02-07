@@ -13,7 +13,7 @@
 		A3BB04B7238FD48F00699069 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3BB04B6238FD48F00699069 /* Assets.xcassets */; };
 		A3BB04BA238FD48F00699069 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3BB04B9238FD48F00699069 /* Preview Assets.xcassets */; };
 		A3BB04BD238FD48F00699069 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3BB04BB238FD48F00699069 /* LaunchScreen.storyboard */; };
-		A3BB04C2238FD48F00699069 /* FourCorners WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A3BB04C1238FD48F00699069 /* FourCorners WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A3BB04C2238FD48F00699069 /* FourCorners.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A3BB04C1238FD48F00699069 /* FourCorners.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A3BB04C8238FD48F00699069 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3BB04C6238FD48F00699069 /* Interface.storyboard */; };
 		A3BB04CA238FD49000699069 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3BB04C9238FD49000699069 /* Assets.xcassets */; };
 		A3BB04D1238FD49000699069 /* FourCorners WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A3BB04D0238FD49000699069 /* FourCorners WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -59,7 +59,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				A3BB04C2238FD48F00699069 /* FourCorners WatchKit App.app in Embed Watch Content */,
+				A3BB04C2238FD48F00699069 /* FourCorners.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -75,7 +75,7 @@
 		A3BB04B9238FD48F00699069 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A3BB04BC238FD48F00699069 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A3BB04BE238FD48F00699069 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A3BB04C1238FD48F00699069 /* FourCorners WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FourCorners WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3BB04C1238FD48F00699069 /* FourCorners.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FourCorners.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3BB04C7238FD48F00699069 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		A3BB04C9238FD49000699069 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3BB04CB238FD49000699069 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				A3BB04AD238FD48E00699069 /* FourCorners.app */,
-				A3BB04C1238FD48F00699069 /* FourCorners WatchKit App.app */,
+				A3BB04C1238FD48F00699069 /* FourCorners.app */,
 				A3BB04D0238FD49000699069 /* FourCorners WatchKit Extension.appex */,
 			);
 			name = Products;
@@ -215,7 +215,7 @@
 			);
 			name = "FourCorners WatchKit App";
 			productName = "FourCorners WatchKit App";
-			productReference = A3BB04C1238FD48F00699069 /* FourCorners WatchKit App.app */;
+			productReference = A3BB04C1238FD48F00699069 /* FourCorners.app */;
 			productType = "com.apple.product-type.application.watchapp2";
 		};
 		A3BB04CF238FD49000699069 /* FourCorners WatchKit Extension */ = {
@@ -482,7 +482,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"FourCorners WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 2KG9NR622V;
 				ENABLE_PREVIEWS = YES;
@@ -507,7 +507,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"FourCorners WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 2KG9NR622V;
 				ENABLE_PREVIEWS = YES;
@@ -533,12 +533,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 2KG9NR622V;
 				IBSC_MODULE = FourCorners_WatchKit_Extension;
 				INFOPLIST_FILE = "FourCorners WatchKit App/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AnaruHerbert.FourCorners.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FourCorners;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -553,12 +553,12 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 2KG9NR622V;
 				IBSC_MODULE = FourCorners_WatchKit_Extension;
 				INFOPLIST_FILE = "FourCorners WatchKit App/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AnaruHerbert.FourCorners.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FourCorners;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -572,7 +572,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"FourCorners/Preview Content\"";
 				DEVELOPMENT_TEAM = 2KG9NR622V;
 				ENABLE_PREVIEWS = YES;
@@ -593,7 +593,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"FourCorners/Preview Content\"";
 				DEVELOPMENT_TEAM = 2KG9NR622V;
 				ENABLE_PREVIEWS = YES;
